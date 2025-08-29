@@ -1,0 +1,592 @@
+:root{
+  /* Theme */
+  --bg: linear-gradient(135deg, #df1717, #e2d8d3); /* gradient background */
+  --card:#fff;
+  --muted:#666;
+  --accent:#ff5722;
+
+  /* Layout */
+  --nav-h: 72px; /* default navbar height (desktop) */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body{
+  font-family: Inter, system-ui, Arial;
+  margin: 0;
+  background: var(--bg);
+  color: #111;
+  min-height: 100dvh;
+}
+
+.app{
+  max-width:1100px;
+  margin:18px auto;
+  /* space for fixed navbar so headings aren't hidden */
+  padding: calc(var(--nav-h) + 16px) 12px 12px;
+  background: transparent; /* keep gradient from body visible */
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar{
+  width:100%;
+  position:fixed;   /* stays at top */
+  top:0;
+  left:0;
+  z-index:1000;
+  background: var(--accent);
+  color:white;
+  padding:16px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+.navbar h1{ margin:0; font-size:26px; font-weight:bold; }
+.navbar .user input{
+  padding:6px 10px;
+  margin-right:8px;
+  border-radius:6px;
+  border:none;
+}
+.navbar .user button{
+  background:white;
+  color:var(--accent);
+  font-weight:bold;
+  border-radius:6px;
+  padding:6px 14px;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+}
+.navbar .user button:hover{ background:#ffe1d6; }
+
+/* Navbar links */
+.navbar .links{ display:flex; gap:16px; }
+.navbar .links a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:6px 14px;
+  border-radius:6px;
+  transition:all 0.3s ease;
+}
+.navbar .links a:hover{ background:rgba(255,255,255,0.2); }
+.navbar .links a.active{ background:white; color:var(--accent); }
+
+/* ---------------- Header / Layout ---------------- */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+header h1{ margin:0; font-size:20px; }
+header .user input{ padding:6px 8px; margin-right:6px; }
+
+main{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:16px;
+}
+@media(max-width:900px){
+  main{ grid-template-columns:1fr; }
+}
+
+/* ---------------- Buttons ---------------- */
+button{
+  padding:8px 10px;
+  border:0;
+  background:var(--accent);
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+button:disabled{ opacity:0.6; cursor:not-allowed; }
+
+.right h2{ margin-top:0; }
+
+/* ---------------- Generic Grid ---------------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(1,1fr);
+  gap:12px;
+}
+@media(min-width:700px){
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* ---------------- Card (kept your design) ---------------- */
+.card{
+  border:1px solid #ddd;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  transition:all 0.3s ease-in-out;
+  transform:translateY(0);
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  padding:0; /* content sections handle their own padding */
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 12px 24px rgba(0,0,0,0.25);
+}
+.card-left{ flex:1; } /* safe to keep if used elsewhere */
+.card-right{
+  width:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Card title strip */
+.card-title{
+  font-size:1.2rem;
+  font-weight:bold;
+  padding:8px 12px;
+  text-align:center;
+  background:#f8f8f8;
+}
+.card:hover .card-title{ background:var(--accent); color:#fff; }
+
+/* Card image */
+.card-image img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+/* Card body text */
+.card-info{ padding:12px; }
+.meta{ font-size:12px; color:var(--muted); margin-top:6px; }
+.card-info .meta{ font-size:0.9rem; color:#555; margin-bottom:6px; }
+.desc{ margin-top:8px; color:#333; }
+.card-info .desc{ font-size:0.95rem; margin-bottom:6px; }
+.card-info .ingredients{ font-size:0.9rem; margin-bottom:6px; }
+.card-info .match{ font-size:0.85rem; color:#333; font-weight:bold; }
+
+/* Misc card bits preserved */
+.nutri{ display:flex; gap:8px; justify-content:center; }
+.nutri > div{ text-align:center; }
+.actions{ display:flex; gap:10px; margin-top:10px; align-items:center; }
+.rating button{ margin-left:6px; padding:4px 6px; background:#eee; color:#000; border-radius:6px; }
+.rating button.active{ background:var(--accent); color:#fff; }
+
+/* ---------------- Empty state ---------------- */
+.empty{
+  padding:18px;
+  background:#fff;
+  border-radius:8px;
+  text-align:center;
+}
+
+/* ---------------- Modal ---------------- */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+.modal-content{
+  background:#fff;
+  border-radius:10px;
+  padding:20px;
+  max-width:650px;
+  width:90%;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.close-btn{
+  color: #000;
+  background-color: #eee;
+  position:absolute;
+  top:10px;
+  right:12px;
+  background:none;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+.modal-image img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+.modal-content h2,
+.modal-content h3{ margin:0 0 8px 0; font-weight:bold; }
+.modal-content p,
+.modal-content ul,
+.modal-content ol{ margin:0 0 8px 0; line-height:1.4; }
+.modal-content ul,
+.modal-content ol{ padding-left:20px; }
+.modal-content section{ margin-bottom:12px; }
+
+/* ---------------- Servings control ---------------- */
+.servings-control{
+  margin:12px 0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.servings-control input{
+  width:60px;
+  padding:4px;
+  font-size:1rem;
+  text-align:center;
+}
+
+/* ---------------- Inputs panel ---------------- */
+.inputs{
+  background:#fff;
+  padding:20px;
+  margin:20px;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* Upload section */
+.upload-section{ display:flex; flex-direction:column; gap:10px; }
+.section-title{ font-weight:600; font-size:16px; margin-bottom:4px; }
+.file-input-wrapper{ display:flex; align-items:center; gap:10px; }
+input[type="file"]{ display:none; }
+.upload-btn{
+  background:var(--accent);
+  color:white;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:500;
+  transition:0.3s;
+}
+.upload-btn:hover{ background:#e24d1b; }
+.file-name{ font-size:14px; color:#444; }
+.preview-img{
+  width:200px;
+  border-radius:10px;
+  margin-top:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Options row */
+.options-row{ display:flex; gap:16px; flex-wrap:wrap; }
+.option{ flex:1; display:flex; flex-direction:column; gap:6px; }
+.option label{ font-weight:600; font-size:14px; }
+.option select,
+.option input{
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  font-size:14px;
+}
+
+/* Detected tags */
+.detected-box{ margin-top:12px; }
+.tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.tag{
+  padding:6px 10px;
+  background:#f0f0f0;
+  border-radius:20px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.remove-tag{
+  background:none;
+  border:none;
+  color:#ff3b3b;
+  font-size:14px;
+  cursor:pointer;
+  padding:0;
+  margin-left:4px;
+}
+
+/* Ingredient input block */
+.ingredient-input{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.ingredient-input label{ font-weight:600; font-size:14px; margin-bottom:6px; color:#333; }
+.ingredient-input textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  resize:none;
+  font-size:14px;
+  transition:all 0.2s ease-in-out;
+}
+.ingredient-input textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,87,34,0.15);
+}
+.ingredient-input .row{
+  display:flex;
+  gap:16px;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+.ingredient-input .row div{ flex:1; display:flex; flex-direction:column; gap:6px; }
+.ingredient-input select,
+.ingredient-input input[type=number]{
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
+  transition:all 0.2s;
+}
+.ingredient-input select:focus,
+.ingredient-input input[type=number]:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(255,87,34,0.15);
+}
+.ingredient-input button{
+  flex:1;
+  padding:10px 16px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.ingredient-input button:first-child{
+  background:linear-gradient(135deg,#ff6b6b,#ff8e53);
+  color:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+.ingredient-input button:first-child:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.25);
+}
+.ingredient-input button:last-child{ background:#f1f1f1; color:#333; }
+.ingredient-input button:last-child:hover{ background:#e5e5e5; }
+
+/* ---------------- Results ---------------- */
+.results{ margin:20px; }
+.results h2{ margin-bottom:16px; }
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(1,1fr);
+  gap:16px;
+}
+@media(min-width:700px){
+  .results-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media(min-width:1000px){
+  .results-grid{ grid-template-columns:repeat(4,1fr); }
+}
+
+/* ---------------- Responsive tweaks ---------------- */
+@media(max-width:768px){
+  /* Navbar stacks → taller; increase spacing below it */
+  :root{ --nav-h: 112px; }
+
+  .navbar{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 16px;
+  }
+  .navbar .links{ margin-top:10px; flex-wrap:wrap; }
+  .navbar .user{ margin-top:10px; width:100%; }
+  .navbar .user input{ width:70%; }
+  .navbar .user button{ width:28%; }
+
+  .app{ padding: calc(var(--nav-h) + 16px) 10px 10px; }
+  main{ grid-template-columns:1fr; }
+  .card-image img{ height:150px; }
+  .results-grid{ grid-template-columns:1fr; }
+  .ingredient-input .row{ flex-direction:column; }
+  .preview-img{ width:100%; max-width:300px; }
+}
+
+@media(max-width:480px){
+  /* On very small phones the navbar can be even taller */
+  :root{ --nav-h: 128px; }
+
+  .navbar h1{ font-size:20px; }
+  .card-title{ font-size:1rem; padding:6px 8px; }
+  .card-image img{ height:120px; }
+  .modal-image img{ height:180px; }
+  .upload-btn{ padding:6px 10px; font-size:13px; }
+  .file-name{ font-size:12px; }
+  .option select,.option input{ font-size:13px; padding:6px; }
+  .ingredient-input textarea{ font-size:13px; }
+  .ingredient-input button{ padding:8px 12px; font-size:13px; }
+}
+
+
+/* 🔥 Sirf bada main card ke liye */
+.inputs {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 87, 34, 0.15);
+  box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+/* glowing animated border only for main card */
+.inputs::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #ff5722, #ff8e53, #ffcc70, #ff5722);
+  background-size: 300% 300%;
+  animation: border-glow 8s ease infinite;
+  z-index: -1;
+}
+
+/* Hover lift effect only on main card */
+.inputs:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0px 14px 30px rgba(255, 87, 34, 0.25);
+}
+
+/* Chote cards normal hi rahenge */
+.ingredient-input {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Hover pe bhi white hi rahenge */
+.ingredient-input:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+/* Sirf outer main card ke liye */
+.inputs {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 87, 34, 0.15);
+  box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+/* glowing animated border only for main card */
+.inputs::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #ff5722, #ff8e53, #ffcc70, #ff5722);
+  background-size: 300% 300%;
+  animation: border-glow 8s ease infinite;
+  z-index: -1;
+}
+
+/* Hover lift effect only on main card */
+.inputs:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0px 14px 30px rgba(255, 87, 34, 0.25);
+}
+
+/* 👇 Important: andar ke sections white fix */
+.upload-section,
+.options-row,
+.detected-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+
+
+
+
+/* ---------------- Outer Main Card ---------------- */
+.inputs {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 87, 34, 0.15);
+  box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+/* Glowing animated border only for main card */
+.inputs::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #ff5722, #ff8e53, #ffcc70, #ff5722);
+  background-size: 300% 300%;
+  animation: border-glow 8s ease infinite;
+  z-index: -1;
+}
+
+/* Hover lift effect only on outer main card */
+.inputs:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0px 14px 30px rgba(255, 87, 34, 0.25);
+}
+
+/* ---------------- Inner White Sections ---------------- */
+.upload-section,
+.options-row,
+.detected-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: none !important; /* disable hover transition */
+}
+
+.upload-section:hover,
+.options-row:hover,
+.detected-box:hover {
+  background: #fff !important;  /* no hover color */
+  transform: none !important;   /* no hover scale */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* stay fixed */
+}
