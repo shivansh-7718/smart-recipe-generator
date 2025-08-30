@@ -590,3 +590,142 @@ input[type="file"]{ display:none; }
   transform: none !important;   /* no hover scale */
   box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* stay fixed */
 }
+
+
+
+
+/* ✅ Navbar responsive fix */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar h1 {
+    font-size: 20px;
+  }
+
+  .navbar .links {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 6px;
+  }
+
+  .navbar .user {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .navbar .user input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .navbar .user button {
+    white-space: nowrap;
+  }
+}
+
+/* ✅ Bohot choti screens ke liye aur clean kar do */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 14px;
+  }
+
+  .navbar .links {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .navbar .user {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar .user input,
+  .navbar .user button {
+    width: 100%;
+  }
+}
+
+
+/* Default desktop style */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #ff6b6b, #ff914d);
+  padding: 12px 20px;
+  color: #fff;
+  
+}
+
+.navbar h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 16px;
+}
+
+.navbar .user {
+  display: flex;
+  gap: 8px;
+}
+
+/* Hamburger hidden by default */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+/* ✅ Mobile view */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    height: 30px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    
+  }
+
+  .navbar .links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .navbar .links.show {
+    display: flex;
+  }
+
+  .navbar .user {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .navbar .user input {
+    flex: 1;
+  }
+}
+
+
+
+
