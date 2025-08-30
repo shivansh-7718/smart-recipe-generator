@@ -179,7 +179,7 @@ export default function ImageUploader({ onResults }) {
             Choose File
           </label>
           <span className="file-name">
-            {file ? file.name : "No file chosen"}
+            {file ? "file chosen" : "No file chosen"}
           </span>
         </div>
         {preview && (
@@ -207,7 +207,7 @@ export default function ImageUploader({ onResults }) {
         </div>
 
         <div className="option">
-          <label>Max Cooking Time (minutes)</label>
+          <label>Max Cooking Time (min)</label>
           <input
             type="number"
             min="1"
