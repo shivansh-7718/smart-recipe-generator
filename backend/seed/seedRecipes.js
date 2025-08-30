@@ -397,7 +397,7 @@ const recipes = [
     nutrition: { calories: 90, protein_g: 5, carbs_g: 6, fat_g: 4 },
     dietary: ["vegetarian","glutenfree"],
     cuisine: "Indian",
-    imageUrl:"https://veganpunks.com/wp-content/uploads/2021/02/Vegan-raita-6-768x960.jpg"
+    imageUrl:"https://cdn.foodfanatic.com/uploads/2013/09/cucumber-raita-photo-scaled.jpg"
   }
 ];
 
